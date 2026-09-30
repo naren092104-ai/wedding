@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  input, textarea, select {
+    font-size: 16px; /* Prevents auto-zoom on mobile iOS Safari */
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+}
+
+.font-cinzel-decorative {
+  font-family: 'Cinzel Decorative', 'Cinzel', Georgia, serif;
+}
+
+.font-garamond {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-tamil {
+  font-family: 'Noto Sans Tamil', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-tamil-serif {
+  font-family: 'Noto Serif Tamil', Georgia, serif;
+}
+
+/* 24K Royal Gold Foil Shimmer for Couple Names */
+@keyframes goldNameShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-royal-gold {
+  background: linear-gradient(
+    110deg,
+    #fef08a 0%,
+    #fde047 18%,
+    #ffffff 28%,
+    #f59e0b 45%,
+    #fbbf24 62%,
+    #ffffff 78%,
+    #d97706 90%,
+    #fef08a 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldNameShimmer 5s linear infinite;
+}
+
+@keyframes royalGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.35)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.65)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.9));
+    transform: scale(1.008);
+  }
+}
+
+.animate-royal-glow {
+  animation: royalGlowPulse 4.5s ease-in-out infinite;
+}
+
+/* Luxury gold text and borders */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-light {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef08a 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-subtle {
+  border-color: rgba(234, 179, 8, 0.25);
+}
+
+.bg-gold-glow {
+  background: radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+}
+
+/* Animations & Visual Effects */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+.animate-float-slow {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+@keyframes spinVerySlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-very-slow {
+  animation: spinVerySlow 22s linear infinite;
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.06);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 4s ease-in-out infinite;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmerEffect 4s linear infinite;
+}
+
+@keyframes heartbeatPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.15);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeatPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes goldGlowEffect {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.25), inset 0 0 10px rgba(245, 158, 11, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.45), inset 0 0 20px rgba(245, 158, 11, 0.25);
+  }
+}
+
+.animate-gold-glow {
+  animation: goldGlowEffect 3.5s ease-in-out infinite;
+}
+
+@keyframes floatDust {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-dust {
+  animation: floatDust 12s linear infinite;
+}
+
+/* 3D Paper Flip Calendar Animation for Countdown */
+@keyframes paperLeafFall {
+  0% {
+    transform: rotateX(0deg) translateY(0) scale(1);
+    opacity: 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    filter: brightness(1);
+  }
+  35% {
+    transform: rotateX(-40deg) translateY(2px) scale(0.98);
+    opacity: 0.95;
+    filter: brightness(0.85);
+  }
+  75% {
+    transform: rotateX(-85deg) translateY(10px) scale(0.92);
+    opacity: 0.5;
+    filter: brightness(0.55);
+  }
+  100% {
+    transform: rotateX(-115deg) translateY(20px) scale(0.85);
+    opacity: 0;
+    filter: brightness(0.3);
+  }
+}
+
+.animate-paper-fall {
+  transform-origin: top center;
+  animation: paperLeafFall 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes paperUnderReveal {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-paper-reveal {
+  animation: paperUnderReveal 0.45s ease-out forwards;
+}
+
+.perspective-paper {
+  perspective: 700px;
+}
