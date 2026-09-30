@@ -19,10 +19,11 @@ export const FloatingParticles: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
@@ -43,7 +44,7 @@ export const FloatingParticles: React.FC = () => {
       'rgba(255, 255, 255,', // Diamond white
     ];
 
-    const particleCount = Math.min(50, Math.floor(window.innerWidth / 24));
+    const particleCount = Math.min(24, Math.max(8, Math.floor(window.innerWidth / 48)));
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -76,6 +77,7 @@ export const FloatingParticles: React.FC = () => {
     };
 
     const render = () => {
+      if (document.hidden) return;
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
@@ -120,10 +122,20 @@ export const FloatingParticles: React.FC = () => {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    if (!document.hidden) render();
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

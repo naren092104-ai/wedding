@@ -40,6 +40,8 @@ export const CoupleStorySection: React.FC<CoupleStorySectionProps> = ({ lang }) 
                   src={WEDDING_DATA.images.avatar}
                   alt="Couple cartoon portrait"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                 />
               </div>

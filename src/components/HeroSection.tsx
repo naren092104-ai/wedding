@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, Heart, Share2, Sparkles, Download, FileDown, Loader2 } from 'lucide-react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { CountdownTimer } from './CountdownTimer';
-import { generateWeddingInvitationPdf } from '../utils/pdfGenerator';
 
 interface HeroSectionProps {
   lang: 'en' | 'ta';
@@ -192,6 +191,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 src={WEDDING_DATA.images.hero}
                 alt="Cute 3D cartoon portrait of groom Jabaraj and bride Veronica"
                 referrerPolicy="no-referrer"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-black/20 pointer-events-none" />

@@ -3,20 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { HeroSection } from './components/HeroSection';
 import { CoupleStorySection } from './components/CoupleStorySection';
 import { EventsSection } from './components/EventsSection';
 import { FamilyTributeSection } from './components/FamilyTributeSection';
 import { BlessingsWall } from './components/BlessingsWall';
 import { Footer } from './components/Footer';
-import { RSVPModal } from './components/RSVPModal';
-import { DigitalCardModal } from './components/DigitalCardModal';
-import { PdfDownloadModal } from './components/PdfDownloadModal';
 import { GrandInvitationEnvelope } from './components/GrandInvitationEnvelope';
 import { FloatingParticles } from './components/FloatingParticles';
 import { Heart, Globe, FileDown, Mail } from 'lucide-react';
 import { WEDDING_DATA } from './data/weddingData';
+
+const RSVPModal = lazy(() => import('./components/RSVPModal').then((module) => ({ default: module.RSVPModal })));
+const DigitalCardModal = lazy(() => import('./components/DigitalCardModal').then((module) => ({ default: module.DigitalCardModal })));
+const PdfDownloadModal = lazy(() => import('./components/PdfDownloadModal').then((module) => ({ default: module.PdfDownloadModal })));
 
 export default function App() {
   const [lang, setLang] = useState<'en' | 'ta'>('ta'); // Default to Tamil
@@ -51,6 +52,8 @@ export default function App() {
           src={WEDDING_DATA.images.palaceBg}
           alt="Royal Wedding Palace Background"
           referrerPolicy="no-referrer"
+          fetchPriority="low"
+          decoding="async"
           className="w-full h-full object-cover object-center filter brightness-[0.25] contrast-[1.2] blur-[2.5px] scale-105"
         />
 
@@ -141,23 +144,25 @@ export default function App() {
       )}
 
       {/* Modals */}
-      <RSVPModal
-        isOpen={isRsvpOpen}
-        onClose={() => setIsRsvpOpen(false)}
-        lang={lang}
-      />
+      <Suspense fallback={null}>
+        <RSVPModal
+          isOpen={isRsvpOpen}
+          onClose={() => setIsRsvpOpen(false)}
+          lang={lang}
+        />
 
-      <DigitalCardModal
-        isOpen={isCardModalOpen}
-        onClose={() => setIsCardModalOpen(false)}
-        lang={lang}
-      />
+        <DigitalCardModal
+          isOpen={isCardModalOpen}
+          onClose={() => setIsCardModalOpen(false)}
+          lang={lang}
+        />
 
-      <PdfDownloadModal
-        isOpen={isPdfModalOpen}
-        onClose={() => setIsPdfModalOpen(false)}
-        currentLang={lang}
-      />
+        <PdfDownloadModal
+          isOpen={isPdfModalOpen}
+          onClose={() => setIsPdfModalOpen(false)}
+          currentLang={lang}
+        />
+      </Suspense>
 
       {/* Grand Opening Royal Envelope Screen (Appears on open or replay) */}
       {!isEnvelopeOpened && (
